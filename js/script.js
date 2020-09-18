@@ -5,12 +5,12 @@ $(document).ready(
     // Milestone 1
     // Creiamo il mese di Gennaio, e con la chiamata all'API inseriamo le festività.
     // API: https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0
-    var startDate = moment("2018-01-01");
-    console.log(startDate);
+    var date = "2018-01-01";
+    var startDate = moment(date);
+
     var daysInMonth = startDate.daysInMonth();
-    console.log(daysInMonth);
-    var counter = startDate._i;
-    console.log(counter);
+
+
     // compilo il template handlebars
     var source = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
@@ -21,17 +21,20 @@ $(document).ready(
       "url": "https://flynn.boolean.careers/exercises/api/holidays?year=2018&month=0",
       "method": "GET",
       "success": function (data) {
-        console.log(data.response);
         //renderizzo handlebars
-        for (var i = 1; i < daysInMonth + 1; i++) {
-          var counter = startDate._i;
+        for (var i = 0; i < daysInMonth + 1; i++) {
+          var newDate = moment();
+          var counterDays = newDate._i;
+
           var context = {
-            "numero": i,
-            "mese": startDate.format("MMMM")
-            
+            "numero": 1 + i,
+            "mese": startDate.format("MMMM"),
+            "date": counterDays
           };
           var html = template(context);
           $("#calendar").append(html);
+          var newDate = moment(startDate).add(1, "d");
+          console.log(newDate);
         }
 
       },
