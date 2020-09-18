@@ -4,8 +4,17 @@
   padding: 0;
 }
 
+.prev, .next {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+}
+
+.holyday {
+  color: red;
 }
