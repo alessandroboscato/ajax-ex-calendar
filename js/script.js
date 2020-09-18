@@ -10,7 +10,6 @@ $(document).ready(
 
     var daysInMonth = startDate.daysInMonth();
 
-
     // compilo il template handlebars
     var source = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
@@ -24,9 +23,7 @@ $(document).ready(
         //renderizzo handlebars
         for (var i = 0; i < daysInMonth; i++) {
           var actualDate = moment(startDate).add(i, "d");
-          console.log(actualDate);
           var counterDays = actualDate.format("YYYY-MM-DD");
-
           var context = {
             "numero": 1 + i,
             "mese": startDate.format("MMMM"),
@@ -36,11 +33,22 @@ $(document).ready(
           $("#calendar").append(html);
 
         }
-
+        printHolyday(data.response);
       },
       "error": function (richiesta, stato, errori) {
       alert("E' avvenuto un errore. " + errore);
       }
       });
+
+      // ------------functions--------------
+      function printHolyday(data) {
+        for (var j = 0; j < data.length; j++) {
+          var holydayDate = data[j].date;
+          var holydayName = data[j].name;
+          $(".day[data-attribute='"+holydayDate+"']").addClass("holyday");
+
+          $(".day[data-attribute='"+holydayDate+"'] .holydayType").text(" - "+holydayName);
+        }
+      }
 
   });
