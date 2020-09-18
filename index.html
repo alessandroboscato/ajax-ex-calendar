@@ -5,10 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Calendar</title>
   </head>
   <body>
+    <div class="container">
+      <header>
+        <h1>Calendario</h1>
+        <h2>Gennaio</h2>
+        <div class="prev">Precedente</div>
+        <div class="next">Successivo</div>
+      </header>
+      <main>
+        <ul id="calendar">
 
+        </ul>
+      </main>
+    </div>
+  <script id="entry-template" type="text/x-handlebars-template">
+    <li>{{numero}}{{mese}}{{anno}}<span>{{festività}}</span></li>
+  </script>
   <!-- jquery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- momentjs -->
