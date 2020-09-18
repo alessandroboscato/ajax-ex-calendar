@@ -22,9 +22,10 @@ $(document).ready(
       "method": "GET",
       "success": function (data) {
         //renderizzo handlebars
-        for (var i = 0; i < daysInMonth + 1; i++) {
-          var newDate = moment();
-          var counterDays = newDate._i;
+        for (var i = 0; i < daysInMonth; i++) {
+          var actualDate = moment(startDate).add(i, "d");
+          console.log(actualDate);
+          var counterDays = actualDate.format("YYYY-MM-DD");
 
           var context = {
             "numero": 1 + i,
@@ -33,8 +34,7 @@ $(document).ready(
           };
           var html = template(context);
           $("#calendar").append(html);
-          var newDate = moment(startDate).add(1, "d");
-          console.log(newDate);
+
         }
 
       },
