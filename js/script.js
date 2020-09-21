@@ -66,6 +66,7 @@ $(document).ready(
         }
 
       });
+
       //click prev
       $("#prev").click(
         function() {
@@ -96,12 +97,9 @@ $(document).ready(
           }
         });
 
-
       // ------------functions--------------
 
       function printDays() {
-        // TEMPLATE HANDLEBARS
-
         for (var i = 0; i < daysInMonth; i++) {
           var actualDate = moment(startDate).add(i, "d"); //clone data --!importante
           var counterDays = actualDate.format("YYYY-MM-DD"); // format --!importante
@@ -113,6 +111,11 @@ $(document).ready(
           // render handlebars
           var html = template(context);
           $("#calendar").append(html);
+          $("#wrapper .box").each(
+            function() {
+              $(this).append(html);
+            }
+          )
         }
       }
 
@@ -121,7 +124,6 @@ $(document).ready(
           var holydayDate = data[j].date;
           var holydayName = data[j].name;
           $(".day[data-attribute='"+holydayDate+"']").addClass("holyday");
-
           $(".day[data-attribute='"+holydayDate+"'] .holydayType").text(" - "+holydayName);
         }
       }
