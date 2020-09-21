@@ -18,11 +18,11 @@ $(document).ready(
     var source = $("#entry-template").html();
     var template = Handlebars.compile(source);
 
-    var startDate = moment("2018-02-01");
+    var startDate = moment("2018-01-01");
     var daysInMonth = startDate.daysInMonth();
 
     // 1° chiamata ajax -- Gennaio 2018
-    var month = 1;
+    var month = 0;
     $.ajax(
       {
       "url": "https://flynn.boolean.careers/exercises/api/holidays",
@@ -43,52 +43,60 @@ $(document).ready(
     //click next
     $("#next").click(
       function() {
-        $("#calendar").html("");
-        $.ajax(
-          {
-          "url": "https://flynn.boolean.careers/exercises/api/holidays",
-          "data": {
-            "year": 2018,
-            "month": month + 1
-          },
-          "method": "GET",
-          "success": function (data) {
-            month += 1;
-            startDate.add(1, "months");
-            daysInMonth = startDate.daysInMonth();
-            printDays();
-            printHolyday(data.response);
-
-          },
-          "error": function (richiesta, stato, errori) {
-          alert("E' avvenuto un errore. " + errore);
-          }
-          });
-      });
-      //click prev
-      $("#prev").click(
-        function() {
+        if (month < 11) {
           $("#calendar").html("");
           $.ajax(
             {
             "url": "https://flynn.boolean.careers/exercises/api/holidays",
             "data": {
               "year": 2018,
-              "month": month - 1
+              "month": month + 1
             },
             "method": "GET",
             "success": function (data) {
-              month -= 1;
-              startDate.subtract(1, "months");
+              month += 1;
+              startDate.add(1, "months");
               daysInMonth = startDate.daysInMonth();
               printDays();
               printHolyday(data.response);
-
             },
             "error": function (richiesta, stato, errori) {
             alert("E' avvenuto un errore. " + errore);
             }
             });
+        } else {
+          alert("Attenzione! Il presente calendario non va oltre dicembre 2018.")
+        }
+
+      });
+      //click prev
+      $("#prev").click(
+        function() {
+          if (month > 0) {
+            $("#calendar").html("");
+            $.ajax(
+              {
+              "url": "https://flynn.boolean.careers/exercises/api/holidays",
+              "data": {
+                "year": 2018,
+                "month": month - 1
+              },
+              "method": "GET",
+              "success": function (data) {
+                month -= 1;
+                startDate.subtract(1, "months");
+                daysInMonth = startDate.daysInMonth();
+                printDays();
+                printHolyday(data.response);
+              },
+              "error": function (richiesta, stato, errori) {
+              alert("E' avvenuto un errore. " + errore);
+              }
+              });
+          } else {
+            alert("Attenzione! Il presente calendario non può andare prima di gennaio 2018.")
+          }
+
         });
 
 
