@@ -15,12 +15,6 @@ $(document).ready(
     // Chiedere all’api quali sono le festività per il mese scelto
     // Evidenziare le festività nella lista
 
-    // TEMPLATE HANDLEBARS
-    var source = document.getElementById("entry-template").innerHTML;
-    var template = Handlebars.compile(source);
-
-    var startDate = moment("2018-01-01");
-    var daysInMonth = startDate.daysInMonth();
 
     // 1° chiamata ajax -- Gennaio 2018
     var month = 0;
@@ -33,6 +27,23 @@ $(document).ready(
       },
       "method": "GET",
       "success": function (data) {
+        printDays();
+        printHolyday(data.response);
+      },
+      "error": function (richiesta, stato, errori) {
+      alert("E' avvenuto un errore. " + errore);
+      }
+      });
+
+      // ------------functions--------------
+
+      function printDays() {
+        // TEMPLATE HANDLEBARS
+        var source = $("#entry-template").html();
+        var template = Handlebars.compile(source);
+        
+        var startDate = moment("2018-01-01");
+        var daysInMonth = startDate.daysInMonth();
         for (var i = 0; i < daysInMonth; i++) {
           var actualDate = moment(startDate).add(i, "d"); //clone data --!importante
           var counterDays = actualDate.format("YYYY-MM-DD"); // format --!importante
@@ -45,14 +56,8 @@ $(document).ready(
           var html = template(context);
           $("#calendar").append(html);
         }
-        printHolyday(data.response);
-      },
-      "error": function (richiesta, stato, errori) {
-      alert("E' avvenuto un errore. " + errore);
       }
-      });
 
-      // ------------functions--------------
       function printHolyday(data) {
         for (var j = 0; j < data.length; j++) {
           var holydayDate = data[j].date;
