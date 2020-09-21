@@ -4,7 +4,7 @@
   padding: 0;
 }
 
-.prev, .next {
+#prev, #next {
   display: inline-block;
   margin-bottom: 20px;
 }
