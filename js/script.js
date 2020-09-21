@@ -12,8 +12,11 @@ $(document).ready(
     // Evidenziare le festività nella lista
 
     var source = $("#entry-template").html();
+    // var sourceSquare = $("#square-template").html(); //bonus
     var template = Handlebars.compile(source);
+    // var templateSquare = Handlebars.compile(sourceSquare); //bonus
 
+    moment.locale("it"); //lingua ita
     var startDate = moment("2018-01-01");
     var daysInMonth = startDate.daysInMonth();
 
@@ -110,12 +113,10 @@ $(document).ready(
           };
           // render handlebars
           var html = template(context);
-          $("#calendar").append(html);
-          $("#wrapper .box").each(
-            function() {
-              $(this).append(html);
-            }
-          )
+          // var htmlSquare = template(context); //bonus
+
+          $("#wrapper").append(html);
+          // $("#wrapper .square").append(htmlSquare) //bonus
         }
       }
 

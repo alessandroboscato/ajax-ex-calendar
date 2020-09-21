@@ -11,58 +11,40 @@
     <div class="container">
       <header>
         <h1>Calendario</h1>
-        <h2>January-2018</h2>
+        <h2>Gennaio-2018</h2>
         <button id="prev">Precedente</button>
         <button id="next">Successivo</button>
       </header>
       <main>
         <div id="wrapper">
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
-          <div class="box"></div>
+          <!-- <div class="square" data-attribute="{{date}}">
+            <h4></h4>
+            <p></p>
+          </div> -->
         </div>
         <ul id="calendar"></ul>
       </main>
     </div>
   <script id="entry-template" type="text/x-handlebars-template">
-    
-    <li class="day" data-attribute="{{date}}">{{numero}} {{mese}}<span class="holydayType"></span></li>
+    <div class="square day" data-attribute="{{date}}">
+      <h4>{{numero}}</h4>
+      <p> {{mese}} <span class="holydayType"></span></p>
+    </div>
+  </script>
+  <script id="square-template" type="text/x-handlebars-template">
+    <div class="square" data-attribute="{{date}}">
+      <h4>{{numero}}</h4>
+      <p> {{mese}}</p>
+    </div>
   </script>
   <!-- jquery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <!-- momentjs -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment-with-locales.min.js"></script>
   <!-- handlebars -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
   <!-- mainjs -->
-  <script type="text/javascript" src="js/script.js"></script>
+  <script type="text/javascript" src="js/script.js" lang="it"></script>
   </body>
 </html>

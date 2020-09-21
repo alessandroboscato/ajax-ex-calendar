@@ -4,6 +4,10 @@
   padding: 0;
 }
 
+h2 {
+  text-transform: capitalize;
+}
+
 #prev, #next {
   display: inline-block;
   margin-bottom: 20px;
@@ -20,6 +24,7 @@
 }
 
   /* BONUS */
+  
 #wrapper {
   width: 100%;
   height: 500px;
@@ -28,7 +33,7 @@
   flex-wrap: wrap;
 }
 
-.box {
+.square {
   width: calc(100% / 7);
   height: 100px;
   border: 1px solid black;
