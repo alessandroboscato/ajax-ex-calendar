@@ -15,43 +15,35 @@ $(document).ready(
     // Chiedere all’api quali sono le festività per il mese scelto
     // Evidenziare le festività nella lista
 
-    
-
-    var date = "2018-01-01";
-    var startDate = moment(date);
-
-    var daysInMonth = startDate.daysInMonth();
-
-    // compilo il template handlebars
+    // TEMPLATE HANDLEBARS
     var source = document.getElementById("entry-template").innerHTML;
     var template = Handlebars.compile(source);
 
-    // chiamata ajax
+    var startDate = moment("2018-01-01");
+    var daysInMonth = startDate.daysInMonth();
+
+    // 1° chiamata ajax -- Gennaio 2018
+    var month = 0;
     $.ajax(
       {
       "url": "https://flynn.boolean.careers/exercises/api/holidays",
       "data": {
         "year": 2018,
-        "month": 0
+        "month": month
       },
       "method": "GET",
       "success": function (data) {
-        //renderizzo handlebars
         for (var i = 0; i < daysInMonth; i++) {
-
-          //cloniamo l'oggetto moment per poterlo modificare e non avere problemi con il ciclo li che altrimenti andrebbe oltre i giorni del mese..
-          var actualDate = moment(startDate).add(i, "d");
-
-          //--!!importante il format()--!!
-          var counterDays = actualDate.format("YYYY-MM-DD");
+          var actualDate = moment(startDate).add(i, "d"); //clone data --!importante
+          var counterDays = actualDate.format("YYYY-MM-DD"); // format --!importante
           var context = {
             "numero": 1 + i,
             "mese": startDate.format("MMMM"),
             "date": counterDays
           };
+          // render handlebars
           var html = template(context);
           $("#calendar").append(html);
-
         }
         printHolyday(data.response);
       },
